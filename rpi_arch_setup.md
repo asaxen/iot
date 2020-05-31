@@ -26,3 +26,16 @@ netctl start wireless-home
 # Enable wifi at start up
 netctl enable wireless-home
 ```
+
+## Temporarly allow root ssh access
+```sh
+nano /etc/ssh/sshd_config
+# Authentication:
+#LoginGraceTime 2m
+PermitRootLogin yes
+#StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
+
+# reboot
+```
