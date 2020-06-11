@@ -13,7 +13,7 @@ pacman-key --init
 pacman-key --populate archlinuxarm
 ```
 
-## Set up WIFI
+## Set up WIFI (prbly do this with systemd.network instead)
 ```sh
 /etc/netctl# install -m640 examples/wireless-wpa wireless-home
 /etc/netctl# cat wireless-home
@@ -39,3 +39,26 @@ PermitRootLogin yes
 
 # reboot
 ```
+
+## Change root user password, add new user and groups, install sudo
+```sh
+# Change root password
+passwd root
+# Add new user
+useradd -m asaxen
+passwd asaxen
+# Check what groups exist
+getent group
+# Install sudo
+pacman -Sy sudo
+# Create group sudo
+groupadd sudo
+# Add user to sudo group
+usermod -aG sudo asaxen
+# Create group docker
+groupadd docker
+usermod -aG docker asaxen
+# Uncomment line in sudoers file allowing users that are a member in sudo group to execute "sudo"
+ nano /etc/sudoers
+```
+
